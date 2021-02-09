@@ -1,15 +1,15 @@
 FROM node:latest
 MAINTAINER Hongcai Deng <admin@dhchouse.com>
 
-RUN apt-get clean all
-RUN apt-get update
-RUN apt-get -y install git
-RUN git clone https://github.com/denghongcai/forsaken-mail.git /forsaken-mail
+RUN mkdir -p /usr/src/forsaken-mail \
+  && mkdir /forsaken-mail
 
-WORKDIR /forsaken-mail
+COPY . /usr/src/forsaken-mail
 
-RUN npm install
+WORKDIR /usr/src/forsaken-mail
 
 EXPOSE 25
 EXPOSE 3000
+
+ENTRYPOINT ["sh", "docker-entrypoint.sh"]
 CMD npm start
