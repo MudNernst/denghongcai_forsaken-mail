@@ -1,7 +1,9 @@
-FROM node:latest
+FROM node:current-alpine
 MAINTAINER Hongcai Deng <admin@dhchouse.com>
 
-RUN mkdir -p /usr/src/forsaken-mail \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+  && apk -U upgrade \
+  && mkdir -p /usr/src/forsaken-mail \
   && mkdir /forsaken-mail
 
 COPY . /usr/src/forsaken-mail
